@@ -6,7 +6,7 @@ import './food_list.dart';
 class Foods extends StatefulWidget {
   final String startingFood;
 
-  Foods({this.startingFood = 'Default'}) {
+  Foods({this.startingFood}) {
     print('[FoodManager Widget] Constructor');
   }
 
@@ -22,7 +22,6 @@ class _FoodsState extends State<Foods> {
   @override
   void initState() {
     print('[FoodManager State] initState()');
-    _foods.add(widget.startingFood);
     super.initState();
   }
 
@@ -48,7 +47,12 @@ class _FoodsState extends State<Foods> {
           margin: EdgeInsets.all(10.0),
           child: AddFood(_addFood),
         ),
-        Expanded(child: FoodList(_foods))
+        Expanded(
+            child: _foods.length > 0
+                ? FoodList(_foods)
+                : Center(
+                    child: Text('no Foods yet'),
+                  ))
       ],
     );
   }
