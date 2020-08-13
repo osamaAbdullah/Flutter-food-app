@@ -47,12 +47,7 @@ class _FoodsState extends State<Foods> {
           margin: EdgeInsets.all(10.0),
           child: AddFood(_addFood),
         ),
-        Expanded(
-            child: _foods.length > 0
-                ? FoodList(_foods)
-                : Center(
-                    child: Text('no Foods yet'),
-                  ))
+        Expanded(child: FoodList(_foods))
       ],
     );
   }

@@ -1,7 +1,5 @@
+import 'package:firstfluttertest/pages/home.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
-
-import './foods.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -19,12 +17,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
           primarySwatch: Colors.deepOrange,
           accentColor: Colors.deepPurple),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Food list'),
-        ),
-        body: Foods(),
-      ),
+      home: HomePage(),
     );
   }
 }
