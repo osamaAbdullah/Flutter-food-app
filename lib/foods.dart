@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import './food_list.dart';
 
 class Foods extends StatefulWidget {
-  final String startingFood;
+  final Map<String, dynamic> food;
 
-  Foods({this.startingFood}) {
-    print('[FoodManager Widget] Constructor');
-  }
+  Foods({this.food});
 
   @override
   State<StatefulWidget> createState() {
@@ -17,25 +15,28 @@ class Foods extends StatefulWidget {
 }
 
 class _FoodsState extends State<Foods> {
-  List<String> _foods = [];
+  List <Map <String, dynamic>> _foods = [];
 
   @override
   void initState() {
-    print('[FoodManager State] initState()');
     super.initState();
   }
 
   @override
   void didUpdateWidget(Foods oldWidget) {
-    print('[FoodManager State] didUpdateWidget()');
     super.didUpdateWidget(oldWidget);
   }
 
-  void _addFood(String food) {
+  void _addFood(Map<String, dynamic> food) {
     setState(() {
       _foods.add(food);
     });
-    print(_foods);
+  }
+
+  void _deleteFood(int index) {
+    setState(() {
+      _foods.removeAt(index);
+    });
   }
 
   @override
@@ -47,7 +48,7 @@ class _FoodsState extends State<Foods> {
           margin: EdgeInsets.all(10.0),
           child: AddFood(_addFood),
         ),
-        Expanded(child: FoodList(_foods))
+        Expanded(child: FoodList(_foods, _deleteFood))
       ],
     );
   }

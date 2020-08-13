@@ -9,7 +9,7 @@ class AddFood extends StatelessWidget {
     return RaisedButton(
       color: Theme.of(context).primaryColor,
       onPressed: () {
-        _addFood('bryani');
+        _addFood({'title': 'bryani', 'image': 'assets/food.jpg', 'price': '12'});
       },
       child: Text('Add Product'),
     );
