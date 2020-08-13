@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 
-import './product_manager.dart';
+import './foods.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Food list'),
         ),
-        body: ProductManager(),
+        body: Foods(),
       ),
     );
   }
