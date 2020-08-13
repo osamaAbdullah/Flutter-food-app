@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 
 class FoodList extends StatelessWidget {
-  final List <String> _products;
+  final List<String> _foods;
 
-  FoodList(this._products);
+  FoodList(this._foods);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: _products
-          .map(
-            (element) => Card(
+    return ListView.builder(
+      itemBuilder: (BuildContext context,int index) {
+        return Card(
           child: Column(
             children: <Widget>[
               Image.asset('assets/food.jpg'),
-              Text(element)
+              Text(_foods[index])
             ],
           ),
-        ),
-      )
-          .toList(),
+        );
+      },
+      itemCount: _foods.length,
     );
   }
 }
