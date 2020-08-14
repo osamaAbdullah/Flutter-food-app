@@ -1,13 +1,14 @@
-import 'package:firstfluttertest/pages/foods/index.dart';
 import 'package:flutter/material.dart';
 
 import '../../tabs/food/create.dart';
 import '../../tabs/food/list.dart';
 
 class ManagePage extends StatelessWidget {
-  final List<Map<String, dynamic>> foods;
+  final List<Map<String, dynamic>> _foods;
+  final Function _addFood;
+  final Function _editFood;
 
-  ManagePage({this.foods});
+  ManagePage(this._addFood, this._editFood, this._foods);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +25,7 @@ class ManagePage extends StatelessWidget {
               ListTile(
                 title: Text('All Foods'),
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                        return IndexPage();
-                      }));
+                  Navigator.pushReplacementNamed(context, '/foods');
                 },
               )
             ],
@@ -35,15 +33,19 @@ class ManagePage extends StatelessWidget {
         ),
         appBar: AppBar(
           title: Text('Food list'),
-          bottom: TabBar(tabs: <Widget>[
-            Tab(text: 'Add Food', icon: Icon(Icons.create)),
-            Tab(text: 'My Foods', icon: Icon(Icons.list)),
-          ],),
+          bottom: TabBar(
+            tabs: <Widget>[
+              Tab(text: 'Add Food', icon: Icon(Icons.create)),
+              Tab(text: 'My Foods', icon: Icon(Icons.list)),
+            ],
+          ),
         ),
-        body: TabBarView(children: <Widget>[
-          CreateTab((){}),
-          ListTab(),
-        ],),
+        body: TabBarView(
+          children: <Widget>[
+            CreateTab(_addFood),
+            ListTab(_foods, _editFood),
+          ],
+        ),
       ),
     );
   }

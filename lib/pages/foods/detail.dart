@@ -56,9 +56,12 @@ class DetailPage extends StatelessWidget {
             ),
             Container(
                 padding: EdgeInsets.all(10.0),
-                child: Text('\$' + food['price'])),
+                child: Text('\$' + food['price'].toString())),
             Container(
                 padding: EdgeInsets.all(10.0), child: Text(food['title'])),
+            Container(
+                padding: EdgeInsets.all(10.0),
+                child: Text(food['description'])),
             Container(
               padding: EdgeInsets.all(10.0),
               child: ButtonBar(
