@@ -1,9 +1,17 @@
+import 'package:firstfluttertest/models/food.dart';
 import 'package:flutter/material.dart';
 
 class EditPage extends StatelessWidget {
   final Function _editFood;
-  final Map<String, dynamic> _food;
+  final Food _food;
   final int _index;
+
+  final Map<String, dynamic> _formData = {
+    'title': null,
+    'description': null,
+    'price': null,
+    'image': 'assets/food.jpg'
+  };
 
   EditPage(this._food, this._editFood, this._index);
 
@@ -23,7 +31,7 @@ class EditPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Update' + _food['title']),
+          title: Text('Update' + _food.title),
         ),
         body: GestureDetector(
           onTap: () {
@@ -57,7 +65,7 @@ class EditPage extends StatelessWidget {
 
   Widget _titleField() {
     return TextFormField(
-      initialValue: _food['title'],
+      initialValue: _food.title,
       decoration: InputDecoration(labelText: 'Title'),
       validator: (String value) {
         if (value.isEmpty) {
@@ -67,14 +75,14 @@ class EditPage extends StatelessWidget {
         }
       },
       onSaved: (String value) {
-        _food['title'] = value;
+        _formData['title'] = value;
       },
     );
   }
 
   Widget _descriptionField() {
     return TextFormField(
-      initialValue: _food['description'],
+      initialValue: _food.description,
       decoration: InputDecoration(labelText: 'Description'),
       maxLines: 4,
       validator: (String value) {
@@ -85,14 +93,14 @@ class EditPage extends StatelessWidget {
         }
       },
       onSaved: (String value) {
-        _food['description'] = value;
+        _formData['description'] = value;
       },
     );
   }
 
   Widget _priceField() {
     return TextFormField(
-      initialValue: _food['price'].toString(),
+      initialValue: _food.price.toString(),
       decoration: InputDecoration(labelText: 'Price'),
       keyboardType: TextInputType.number,
       validator: (String value) {
@@ -103,7 +111,7 @@ class EditPage extends StatelessWidget {
         return null;
       },
       onSaved: (String value) {
-        _food['price'] = value;
+        _formData['price'] = double.parse(value);
       },
     );
   }
@@ -114,7 +122,13 @@ class EditPage extends StatelessWidget {
     }
     print('sibmited');
     _formKey.currentState.save();
-    _editFood(_food, _index);
+    _editFood(
+        Food(
+            title: _formData['title'],
+            description: _formData['description'],
+            price: _formData['price'],
+            image: _formData['image']),
+        _index);
     print('add executed');
     Navigator.pushReplacementNamed(context, '/foods');
   }

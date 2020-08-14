@@ -1,3 +1,4 @@
+import 'package:firstfluttertest/models/food.dart';
 import 'package:flutter/material.dart';
 
 class CreateTab extends StatelessWidget {
@@ -103,7 +104,11 @@ class CreateTab extends StatelessWidget {
     }
     print('sibmited');
     _formKey.currentState.save();
-    _addFood(_formData);
+    _addFood(Food(
+        title: _formData['title'],
+        description: _formData['description'],
+        price: _formData['price'],
+        image: _formData['image']));
     print('add executed');
     Navigator.pushReplacementNamed(context, '/foods');
   }

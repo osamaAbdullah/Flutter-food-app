@@ -1,5 +1,6 @@
 import 'package:firstfluttertest/models/food.dart';
 import 'package:firstfluttertest/pages/auth/login.dart';
+import 'package:firstfluttertest/pages/foods/index.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MainState extends State<MyApp> {
-  List<Map<String, dynamic>> _foods = [];
+  List<Food> _foods = [];
 
   @override
   void initState() {
@@ -29,8 +30,7 @@ class _MainState extends State<MyApp> {
     super.didUpdateWidget(oldWidget);
   }
 
-  void _addFood(Map<String, dynamic> food) {
-    print('add here executed');
+  void _addFood(Food food) {
     print(food);
     setState(() {
       _foods.add(food);
@@ -43,7 +43,7 @@ class _MainState extends State<MyApp> {
     });
   }
 
-  void _editFood(Map<String, dynamic> food, index) {
+  void _editFood(Food food, index) {
     setState(() {
       _foods[index] = food;
     });
@@ -60,7 +60,7 @@ class _MainState extends State<MyApp> {
       routes: {
         '/': (BuildContext context) => LoginPage(),
         '/foods': (BuildContext context) =>
-            FoodModel(_foods, _addFood, _deleteFood, _editFood),
+            IndexPage(_foods, _addFood, _deleteFood, _editFood),
       },
     );
   }

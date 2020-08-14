@@ -1,8 +1,9 @@
+import 'package:firstfluttertest/models/food.dart';
 import 'package:firstfluttertest/pages/foods/edit.dart';
 import 'package:flutter/material.dart';
 
 class ListTab extends StatelessWidget {
-  final List<Map<String, dynamic>> _foods;
+  final List<Food> _foods;
   final Function _editFood;
 
   ListTab(this._foods, this._editFood);
@@ -21,10 +22,10 @@ class ListTab extends StatelessWidget {
               children: <Widget>[
                 ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: AssetImage(_foods[index]['image']),
+                    backgroundImage: AssetImage(_foods[index].image),
                   ),
-                  title: Text(_foods[index]['title']),
-                  subtitle: Text(_foods[index]['description']),
+                  title: Text(_foods[index].title),
+                  subtitle: Text(_foods[index].description),
                   trailing: IconButton(
                     icon: Icon(Icons.edit),
                     onPressed: () {

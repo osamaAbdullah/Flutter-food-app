@@ -1,10 +1,11 @@
+import 'package:firstfluttertest/models/food.dart';
 import 'package:flutter/material.dart';
 
 import '../../tabs/food/create.dart';
 import '../../tabs/food/list.dart';
 
 class ManagePage extends StatelessWidget {
-  final List<Map<String, dynamic>> _foods;
+  final List<Food> _foods;
   final Function _addFood;
   final Function _editFood;
 

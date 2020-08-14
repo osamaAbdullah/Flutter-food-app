@@ -1,7 +1,8 @@
+import 'package:firstfluttertest/models/food.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  final Map<String, dynamic> food;
+  final Food food;
 
   DetailPage(this.food);
 
@@ -42,26 +43,24 @@ class DetailPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(food['title'] + ' Detail'),
+          title: Text(food.title + ' Detail'),
         ),
         body: Column(
 //        mainAxisAlignment: MainAxisAlignment.center,
 //        crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             GestureDetector(
-              child: Image.asset(food['image']),
+              child: Image.asset(food.image),
               onTap: () {
                 print('you taped');
               },
             ),
             Container(
                 padding: EdgeInsets.all(10.0),
-                child: Text('\$' + food['price'].toString())),
+                child: Text('\$' + food.price.toString())),
+            Container(padding: EdgeInsets.all(10.0), child: Text(food.title)),
             Container(
-                padding: EdgeInsets.all(10.0), child: Text(food['title'])),
-            Container(
-                padding: EdgeInsets.all(10.0),
-                child: Text(food['description'])),
+                padding: EdgeInsets.all(10.0), child: Text(food.description)),
             Container(
               padding: EdgeInsets.all(10.0),
               child: ButtonBar(
