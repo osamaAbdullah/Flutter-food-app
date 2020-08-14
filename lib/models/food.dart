@@ -1,18 +1,18 @@
 import 'package:firstfluttertest/pages/foods/detail.dart';
 import 'package:flutter/material.dart';
 
-class Foods extends StatefulWidget {
+class FoodModel extends StatefulWidget {
   final Map<String, dynamic> food;
 
-  Foods({this.food});
+  FoodModel({this.food});
 
   @override
   State<StatefulWidget> createState() {
-    return _FoodsState();
+    return _FoodModelState();
   }
 }
 
-class _FoodsState extends State<Foods> {
+class _FoodModelState extends State<FoodModel> {
   List <Map <String, dynamic>> _foods = [];
 
   @override
@@ -21,7 +21,7 @@ class _FoodsState extends State<Foods> {
   }
 
   @override
-  void didUpdateWidget(Foods oldWidget) {
+  void didUpdateWidget(FoodModel oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 

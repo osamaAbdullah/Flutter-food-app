@@ -14,10 +14,7 @@ class LoginPage extends StatelessWidget {
             color: Theme.of(context).accentColor,
             child: Text('LOGIN'),
             onPressed: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (BuildContext context) {
-                return IndexPage();
-              }));
+              Navigator.pushReplacementNamed(context, '/foods');
             },
           )
         ],

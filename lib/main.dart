@@ -1,4 +1,5 @@
 import 'package:firstfluttertest/pages/auth/login.dart';
+import 'package:firstfluttertest/pages/foods/index.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,6 +19,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.deepOrange,
           accentColor: Colors.deepPurple),
       home: LoginPage(),
+      routes: {
+        '/foods': (BuildContext context) => IndexPage(),
+        '/login': (BuildContext context) => LoginPage(),
+      },
     );
   }
 }

@@ -5,13 +5,40 @@ class DetailPage extends StatelessWidget {
 
   DetailPage(this.food);
 
+  _showWarning(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('You will not be able to undo this action!'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Discard'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                child: Text('Delete'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context, 'remove');
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
         print('back event');
         Navigator.pop(context, 'nothing'); // will go back
-        return Future.value(false); // it must return a false if not it will pop the root page
+        return Future.value(
+            false); // it must return a false if not it will pop the root page
       },
       child: Scaffold(
         appBar: AppBar(
@@ -37,7 +64,7 @@ class DetailPage extends StatelessWidget {
                   RaisedButton(
                     color: Colors.red,
                     child: Text('DELETE'),
-                    onPressed: () => Navigator.pop(context, 'remove'),
+                    onPressed: () => _showWarning(context),
                   ),
                 ],
               ),

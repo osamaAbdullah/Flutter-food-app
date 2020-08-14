@@ -29,7 +29,7 @@ class IndexPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Food list'),
         ),
-        body: Foods(),
+        body: FoodModel(),
       );
   }
 }
