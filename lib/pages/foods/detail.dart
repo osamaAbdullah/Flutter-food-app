@@ -48,7 +48,15 @@ class DetailPage extends StatelessWidget {
 //        mainAxisAlignment: MainAxisAlignment.center,
 //        crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image.asset(food['image']),
+            GestureDetector(
+              child: Image.asset(food['image']),
+              onTap: () {
+                print('you taped');
+              },
+            ),
+            Container(
+                padding: EdgeInsets.all(10.0),
+                child: Text('\$' + food['price'])),
             Container(
                 padding: EdgeInsets.all(10.0), child: Text(food['title'])),
             Container(
@@ -65,6 +73,19 @@ class DetailPage extends StatelessWidget {
                     color: Colors.red,
                     child: Text('DELETE'),
                     onPressed: () => _showWarning(context),
+                  ),
+                  RaisedButton(
+                    color: Colors.lightGreenAccent,
+                    child: Text('Modal'),
+                    onPressed: () => {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: Text('this is a modal'),
+                            );
+                          })
+                    },
                   ),
                 ],
               ),
