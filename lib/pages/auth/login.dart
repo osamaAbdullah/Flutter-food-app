@@ -1,7 +1,7 @@
-import 'package:firstfluttertest/pages/home.dart';
+import 'package:firstfluttertest/pages/foods/index.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +16,7 @@ class Login extends StatelessWidget {
             onPressed: () {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return HomePage();
+                return IndexPage();
               }));
             },
           )

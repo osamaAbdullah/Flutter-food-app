@@ -1,4 +1,4 @@
-import 'package:firstfluttertest/pages/login.dart';
+import 'package:firstfluttertest/pages/auth/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
           primarySwatch: Colors.deepOrange,
           accentColor: Colors.deepPurple),
-      home: Login(),
+      home: LoginPage(),
     );
   }
 }

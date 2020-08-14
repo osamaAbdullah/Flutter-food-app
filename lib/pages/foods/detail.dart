@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Detail extends StatelessWidget {
+class DetailPage extends StatelessWidget {
   final Map<String, dynamic> food;
 
-  Detail(this.food);
+  DetailPage(this.food);
 
   @override
   Widget build(BuildContext context) {

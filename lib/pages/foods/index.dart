@@ -1,9 +1,9 @@
 import 'package:firstfluttertest/pages/foods/manage.dart';
 import 'package:flutter/material.dart';
 
-import '../foods.dart';
+import '../../models/food.dart';
 
-class HomePage extends StatelessWidget {
+class IndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return Manage();
+                    return ManagePage();
                   }));
                 },
               )

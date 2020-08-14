@@ -1,13 +1,13 @@
-import 'package:firstfluttertest/pages/home.dart';
+import 'package:firstfluttertest/pages/foods/index.dart';
 import 'package:flutter/material.dart';
 
-import 'create.dart';
-import 'list.dart';
+import '../../tabs/food/create.dart';
+import '../../tabs/food/list.dart';
 
-class Manage extends StatelessWidget {
+class ManagePage extends StatelessWidget {
   final List<Map<String, dynamic>> foods;
 
-  Manage({this.foods});
+  ManagePage({this.foods});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class Manage extends StatelessWidget {
                 onTap: () {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                        return HomePage();
+                        return IndexPage();
                       }));
                 },
               )
@@ -41,8 +41,8 @@ class Manage extends StatelessWidget {
           ],),
         ),
         body: TabBarView(children: <Widget>[
-          CreateFood((){}),
-          ListFoods(),
+          CreateTab((){}),
+          ListTab(),
         ],),
       ),
     );

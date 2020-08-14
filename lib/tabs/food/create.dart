@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CreateFood extends StatelessWidget {
+class CreateTab extends StatelessWidget {
   final Function _addFood;
 
-  CreateFood(this._addFood);
+  CreateTab(this._addFood);
 
   @override
   Widget build(BuildContext context) {

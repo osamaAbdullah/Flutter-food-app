@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ListFoods extends StatelessWidget {
+class ListTab extends StatelessWidget {
   final List<Map<String, dynamic>> foods;
 
-  ListFoods({this.foods});
+  ListTab({this.foods});
 
   @override
   Widget build(BuildContext context) {
