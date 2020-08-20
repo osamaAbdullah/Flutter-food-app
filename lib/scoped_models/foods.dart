@@ -73,16 +73,20 @@ mixin FoodModel on Model {
     });
   }
 
-  void editFood(Map<String, dynamic> food, String foodId) {
+  Future<bool> editFood(Map<String, dynamic> food, String foodId) async {
     food.update(
         'image',
         (_) =>
             "https://cdn11.bigcommerce.com/s-ham8sjk/images/stencil/1280x1280/products/279/841/sugar_free_chocolate_chips__1551730133_104.172.159.225__93384.1551730169.jpg?c=2");
-    http
-        .put('https://flutter-test-8ae0a.firebaseio.com/foods/${foodId}.json',
-            body: json.encode(food))
-        .then(
-            (res) {}); // after that it will automatically fetch last data from firebase
+    try {
+      final http.Response response = await http.put(
+          'https://flutter-test-8ae0a.firebaseio.com/foods/${foodId}.json',
+          body: json.encode(food));
+
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
   void deleteFood(String foodId) {
