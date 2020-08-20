@@ -99,7 +99,12 @@ class IndexPage extends StatelessWidget {
         return Card(
           child: Column(
             children: <Widget>[
-              Image.network(foods[index].image),
+              FadeInImage(
+                image: NetworkImage(foods[index].image),
+                height: 300.0,
+                fit: BoxFit.cover,
+                placeholder: AssetImage('assets/food.jpg'),
+              ),
               _buildTitlePriceRow(context, foods[index]),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.5),
