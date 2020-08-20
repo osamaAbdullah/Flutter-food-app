@@ -17,6 +17,23 @@ class IndexPage extends StatelessWidget {
             'description': 'love you',
             'price': 12,
             'image': 'assets/food.jpg'
+          }).then((bool success) {
+            if (!success) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Something went wrong'),
+                      content: Text('Please try again later'),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text('Ok'),
+                          onPressed: () => Navigator.of(context).pop(),
+                        )
+                      ],
+                    );
+                  });
+            }
           });
         },
         child: Text('Add Product'),

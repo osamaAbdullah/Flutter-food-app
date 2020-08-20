@@ -48,9 +48,9 @@ mixin FoodModel on Model {
     });
   }
 
-  void addFood(Map<String, dynamic> food) {
+  Future<bool> addFood(Map<String, dynamic> food) {
     this._isLoading = true;
-    http
+    return http
         .post('https://flutter-test-8ae0a.firebaseio.com/foods.json',
             body: json.encode({
               "title": food['title'],
@@ -60,10 +60,14 @@ mixin FoodModel on Model {
                   "https://cdn11.bigcommerce.com/s-ham8sjk/images/stencil/1280x1280/products/279/841/sugar_free_chocolate_chips__1551730133_104.172.159.225__93384.1551730169.jpg?c=2"
             }))
         .then((http.Response response) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
+        return false;
+      }
       food.putIfAbsent('id', () => json.decode(response.body)['name']);
       _foods.add(mapToFood(food));
       this._isLoading = false;
       notifyListeners();
+      return true;
     });
   }
 
