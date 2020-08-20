@@ -68,6 +68,8 @@ mixin FoodModel on Model {
       this._isLoading = false;
       notifyListeners();
       return true;
+    }).catchError((error) {
+      return false;
     });
   }
 
