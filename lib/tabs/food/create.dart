@@ -1,17 +1,14 @@
-import 'package:firstfluttertest/models/food.dart';
+import 'package:firstfluttertest/scoped_models/main.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class CreateTab extends StatelessWidget {
-  final Function _addFood;
   final Map<String, dynamic> _formData = {
     'title': null,
     'description': null,
     'price': null,
     'image': 'assets/food.jpg'
   };
-
-  CreateTab(this._addFood);
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -37,11 +34,14 @@ class CreateTab extends StatelessWidget {
                 SizedBox(
                   height: 10.0,
                 ),
-                RaisedButton(
-                  child: Text('Add'),
-                  textColor: Colors.white,
-                  onPressed: () => _submit(context),
-                )
+                ScopedModelDescendant<MainModel>(builder:
+                    (BuildContext context, Widget child, MainModel model) {
+                  return RaisedButton(
+                    child: Text('Add'),
+                    textColor: Colors.white,
+                    onPressed: () => _submit(context, model.addFood),
+                  );
+                }),
               ],
             ),
           )),
@@ -98,17 +98,17 @@ class CreateTab extends StatelessWidget {
     );
   }
 
-  void _submit(context) {
+  void _submit(context, Function addFood) {
     if (!_formKey.currentState.validate()) {
       return;
     }
-    print('sibmited');
     _formKey.currentState.save();
-    _addFood(Food(
-        title: _formData['title'],
-        description: _formData['description'],
-        price: _formData['price'],
-        image: _formData['image']));
+    addFood({
+      'title': _formData['title'],
+      'description': _formData['description'],
+      'price': _formData['price'],
+      'image': _formData['image']
+    });
     print('add executed');
     Navigator.pushReplacementNamed(context, '/foods');
   }

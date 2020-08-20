@@ -1,8 +1,9 @@
 import 'package:firstfluttertest/models/food.dart';
+import 'package:firstfluttertest/scoped_models/main.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class EditPage extends StatelessWidget {
-  final Function _editFood;
   final Food _food;
   final int _index;
 
@@ -13,7 +14,7 @@ class EditPage extends StatelessWidget {
     'image': 'assets/food.jpg'
   };
 
-  EditPage(this._food, this._editFood, this._index);
+  EditPage(this._food, this._index);
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -34,10 +35,10 @@ class EditPage extends StatelessWidget {
           title: Text('Update' + _food.title),
         ),
         body: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).requestFocus(FocusNode());
-          },
-          child: Container(
+            onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child: Container(
               margin: EdgeInsets.all(10.0),
               child: Form(
                 key: _formKey,
@@ -50,15 +51,18 @@ class EditPage extends StatelessWidget {
                     SizedBox(
                       height: 10.0,
                     ),
-                    RaisedButton(
-                      child: Text('Update'),
-                      textColor: Colors.white,
-                      onPressed: () => _submit(context),
-                    )
+                    ScopedModelDescendant<MainModel>(builder:
+                        (BuildContext context, Widget child, MainModel model) {
+                      return RaisedButton(
+                        child: Text('Update'),
+                        textColor: Colors.white,
+                        onPressed: () => _submit(context, model.editFood),
+                      );
+                    })
                   ],
                 ),
-              )),
-        ),
+              ),
+            )),
       ),
     );
   }
@@ -116,19 +120,17 @@ class EditPage extends StatelessWidget {
     );
   }
 
-  void _submit(context) {
+  void _submit(context, Function editFood) {
     if (!_formKey.currentState.validate()) {
       return;
     }
-    print('sibmited');
     _formKey.currentState.save();
-    _editFood(
-        Food(
-            title: _formData['title'],
-            description: _formData['description'],
-            price: _formData['price'],
-            image: _formData['image']),
-        _index);
+    editFood({
+      'title': _formData['title'],
+      'description': _formData['description'],
+      'price': _formData['price'],
+      'image': _formData['image']
+    }, _food.id);
     print('add executed');
     Navigator.pushReplacementNamed(context, '/foods');
   }

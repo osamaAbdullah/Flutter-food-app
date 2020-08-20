@@ -1,16 +1,9 @@
-import 'package:firstfluttertest/models/food.dart';
 import 'package:flutter/material.dart';
 
 import '../../tabs/food/create.dart';
 import '../../tabs/food/list.dart';
 
 class ManagePage extends StatelessWidget {
-  final List<Food> _foods;
-  final Function _addFood;
-  final Function _editFood;
-
-  ManagePage(this._addFood, this._editFood, this._foods);
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -43,8 +36,8 @@ class ManagePage extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            CreateTab(_addFood),
-            ListTab(_foods, _editFood),
+            CreateTab(),
+            ListTab(),
           ],
         ),
       ),
