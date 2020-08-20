@@ -179,7 +179,10 @@ class IndexPage extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }
-              return content;
+              return RefreshIndicator(
+                child: content,
+                onRefresh: model.fetchFoods,
+              );
             },
           )),
         ],

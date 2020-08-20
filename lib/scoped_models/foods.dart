@@ -30,9 +30,9 @@ mixin FoodModel on Model {
   }
 
   //crud
-  void fetchFoods() {
+  Future<Null> fetchFoods() {
     this._isLoading = true;
-    http
+    return http
         .get('https://flutter-test-8ae0a.firebaseio.com/foods.json')
         .then((http.Response response) {
       this._foods.clear();
