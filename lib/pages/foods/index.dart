@@ -1,14 +1,14 @@
 import 'package:firstfluttertest/models/food.dart';
 import 'package:firstfluttertest/pages/foods/detail.dart';
 import 'package:firstfluttertest/pages/foods/manage.dart';
-import 'package:firstfluttertest/scoped_models/main.dart';
+import 'package:firstfluttertest/scoped_models/foods.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class IndexPage extends StatelessWidget {
   Widget _addButton(context) {
-    return ScopedModelDescendant<MainModel>(
-        builder: (BuildContext context, Widget child, MainModel model) {
+    return ScopedModelDescendant<FoodModel>(
+        builder: (BuildContext context, Widget child, FoodModel model) {
       return RaisedButton(
         color: Theme.of(context).primaryColor,
         onPressed: () {
@@ -93,7 +93,7 @@ class IndexPage extends StatelessWidget {
           },
         ),
         ScopedModelDescendant(
-          builder: (BuildContext context, Widget child, MainModel model) {
+          builder: (BuildContext context, Widget child, FoodModel model) {
             return IconButton(
               icon: Icon(
                 food.isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -165,8 +165,8 @@ class IndexPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Food list'),
         actions: <Widget>[
-          ScopedModelDescendant<MainModel>(
-            builder: (BuildContext context, Widget child, MainModel model) {
+          ScopedModelDescendant<FoodModel>(
+            builder: (BuildContext context, Widget child, FoodModel model) {
               return IconButton(
                 icon: Icon(model.favoriteFilter
                     ? Icons.favorite
@@ -185,8 +185,8 @@ class IndexPage extends StatelessWidget {
             margin: EdgeInsets.all(10.0),
             child: _addButton(context),
           ),
-          Expanded(child: ScopedModelDescendant<MainModel>(
-            builder: (BuildContext context, Widget child, MainModel model) {
+          Expanded(child: ScopedModelDescendant<FoodModel>(
+            builder: (BuildContext context, Widget child, FoodModel model) {
               if (_isNotFetched) {
                 model.fetchFoods();
                 _isNotFetched = false;

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:firstfluttertest/models/food.dart';
+import 'package:firstfluttertest/scoped_models/users.dart';
 import 'package:http/http.dart' as http;
-import 'package:scoped_model/scoped_model.dart';
 
-mixin FoodModel on Model {
+class FoodModel extends UserModel {
   List<Food> _foods = [];
   bool _favoriteFilter = false;
   bool _isLoading = false;
@@ -33,7 +33,8 @@ mixin FoodModel on Model {
   Future<Null> fetchFoods() {
     this._isLoading = true;
     return http
-        .get('https://flutter-test-8ae0a.firebaseio.com/foods.json')
+        .get(
+            'https://flutter-test-8ae0a.firebaseio.com/foods.json?auth=${authenticatedUser.token}')
         .then((http.Response response) {
       this._foods.clear();
       final Map<String, dynamic> foods = json.decode(response.body);
@@ -51,7 +52,8 @@ mixin FoodModel on Model {
   Future<bool> addFood(Map<String, dynamic> food) {
     this._isLoading = true;
     return http
-        .post('https://flutter-test-8ae0a.firebaseio.com/foods.json',
+        .post(
+            'https://flutter-test-8ae0a.firebaseio.com/foods.json?auth=${authenticatedUser.token}',
             body: json.encode({
               "title": food['title'],
               "description": food['description'],
@@ -80,9 +82,8 @@ mixin FoodModel on Model {
             "https://cdn11.bigcommerce.com/s-ham8sjk/images/stencil/1280x1280/products/279/841/sugar_free_chocolate_chips__1551730133_104.172.159.225__93384.1551730169.jpg?c=2");
     try {
       final http.Response response = await http.put(
-          'https://flutter-test-8ae0a.firebaseio.com/foods/${foodId}.json',
+          'https://flutter-test-8ae0a.firebaseio.com/foods/${foodId}.json?auth=${authenticatedUser.token}',
           body: json.encode(food));
-
       return true;
     } catch (error) {
       return false;
@@ -93,7 +94,7 @@ mixin FoodModel on Model {
     _foods.removeWhere((food) => food.id == foodId);
     http
         .delete(
-            'https://flutter-test-8ae0a.firebaseio.com/foods/${foodId}.json')
+            'https://flutter-test-8ae0a.firebaseio.com/foods/${foodId}.json?auth=${authenticatedUser.token}')
         .then(
             (res) {}); // after that it will automatically fetch last data from firebase
   }
