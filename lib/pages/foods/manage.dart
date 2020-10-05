@@ -1,3 +1,4 @@
+import 'package:firstfluttertest/components/logout_list_tile.dart';
 import 'package:flutter/material.dart';
 
 import '../../tabs/food/create.dart';
@@ -21,7 +22,8 @@ class ManagePage extends StatelessWidget {
                 onTap: () {
                   Navigator.pushReplacementNamed(context, '/foods');
                 },
-              )
+              ),
+              LogoutListTile(),
             ],
           ),
         ),
