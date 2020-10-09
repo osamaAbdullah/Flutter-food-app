@@ -1,3 +1,4 @@
+import 'package:firstfluttertest/components/floating_action_buttons.dart';
 import 'package:firstfluttertest/models/food.dart';
 import 'package:flutter/material.dart';
 
@@ -64,65 +65,76 @@ class DetailPage extends StatelessWidget {
             false); // it must return a false if not it will pop the root page
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(_food.title + ' Detail'),
-        ),
-        body: ListView(
-//        mainAxisAlignment: MainAxisAlignment.center,
-//        crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            GestureDetector(
-              child: Image.network(_food.image),
-              onTap: () {},
-            ),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                _food.title,
-                style: TextStyle(
-                    fontSize: 26.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Oswald'),
+        floatingActionButton: CustomFloatingActionButton(),
+//        appBar: AppBar(
+//          title: Text(_food.title + ' Detail'),
+//        ),
+
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              expandedHeight: 256.0,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text(_food.title + ' Detail'),
+                background: Hero(
+                  tag: _food.id,
+                  child: Image.network(_food.image),
+                ),
               ),
             ),
-            _buildAddressPriceRow(),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                _food.description,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: ButtonBar(
-                alignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RaisedButton(
-                    color: Theme.of(context).accentColor,
-                    child: Text('Back'),
-                    onPressed: () => Navigator.pop(context),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    _food.title,
+                    style: TextStyle(
+                        fontSize: 26.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Oswald'),
                   ),
-                  RaisedButton(
-                    color: Colors.red,
-                    child: Text('DELETE'),
-                    onPressed: () => _showWarning(context),
+                ),
+                _buildAddressPriceRow(),
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    _food.description,
+                    textAlign: TextAlign.center,
                   ),
-                  RaisedButton(
-                    color: Colors.lightGreenAccent,
-                    child: Text('Modal'),
-                    onPressed: () => {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Center(
-                              child: Text('this is a modal'),
-                            );
-                          })
-                    },
+                ),
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: ButtonBar(
+                    alignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      RaisedButton(
+                        color: Theme.of(context).accentColor,
+                        child: Text('Back'),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                      RaisedButton(
+                        color: Colors.red,
+                        child: Text('DELETE'),
+                        onPressed: () => _showWarning(context),
+                      ),
+                      RaisedButton(
+                        color: Colors.lightGreenAccent,
+                        child: Text('Modal'),
+                        onPressed: () => {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Center(
+                                  child: Text('this is a modal'),
+                                );
+                              })
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                )
+              ]),
             )
           ],
         ),

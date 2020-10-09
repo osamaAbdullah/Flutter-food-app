@@ -1,3 +1,4 @@
+import 'package:firstfluttertest/components/form/image.dart';
 import 'package:firstfluttertest/models/food.dart';
 import 'package:firstfluttertest/scoped_models/foods.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,10 @@ class EditPage extends StatelessWidget {
                     _titleField(),
                     _descriptionField(),
                     _priceField(),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    ImageInput(),
                     SizedBox(
                       height: 10.0,
                     ),
